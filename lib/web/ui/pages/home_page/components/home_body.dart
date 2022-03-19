@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -12,6 +14,22 @@ class HomeBody extends StatefulWidget {
 }
 
 class _HomeBodyState extends State<HomeBody> {
+
+  @override
+  void initState() {
+    Timer(const Duration(milliseconds: 9000), () {
+      setState(() {
+        boxWidth = 650;
+        boxHeight = 300;
+      });
+      print("Cabô");
+    });
+    super.initState();
+  }
+
+  double boxWidth = 0;
+  double boxHeight = 0;
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -30,6 +48,7 @@ class _HomeBodyState extends State<HomeBody> {
       ),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           SizedBox(
             height: MediaQuery.of(context).size.height * .1,
@@ -39,12 +58,40 @@ class _HomeBodyState extends State<HomeBody> {
                 FadeAnimatedText("me chamo Matheus", textStyle: GoogleFonts.aubrey(color: Colors.white)),
                 FadeAnimatedText("e aqui mostro um pouco de mim.", textStyle: GoogleFonts.aubrey(color: Colors.white))
               ],
+              isRepeatingAnimation: false,
             ),
           ), 
-          Lottie.asset(
-            "assets/lottie/door.json",
-            width: 300,
-            height: 300,
+          AnimatedContainer(
+            duration: const Duration(milliseconds: 2500),
+            width: boxWidth,
+            height: boxHeight,
+            alignment: Alignment.center,
+            child: boxWidth > 0 ? Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Lottie.asset(
+                  "assets/lottie/door.json",
+                  width: 200,
+                  height: 200,
+                  animate: false,
+                  // fit: BoxFit.fitWidth
+                ),
+                Lottie.asset(
+                  "assets/lottie/door.json",
+                  width: 200,
+                  height: 200,
+                  animate: false,
+                  // fit: BoxFit.fitWidth
+                ),
+                Lottie.asset(
+                  "assets/lottie/door.json",
+                  width: 200,
+                  height: 200,
+                  animate: false,
+                  // fit: BoxFit.fitWidth
+                ),
+              ],
+            ) : const Center(),
           ),
         ],
       ),
