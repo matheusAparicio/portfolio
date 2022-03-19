@@ -1,15 +1,13 @@
 import 'package:flutter/material.dart';
 
-
-class HomeBottomBarComponent extends StatefulWidget {
-  const HomeBottomBarComponent({ Key? key }) : super(key: key);
+class HomeBottomBar extends StatefulWidget {
+  const HomeBottomBar({ Key? key }) : super(key: key);
 
   @override
-  _HomeBottomBarComponentState createState() => _HomeBottomBarComponentState();
+  State<HomeBottomBar> createState() => _HomeBottomBarState();
 }
 
-
-class _HomeBottomBarComponentState extends State<HomeBottomBarComponent> {
+class _HomeBottomBarState extends State<HomeBottomBar> {
   @override
   Widget build(BuildContext context) {
     return Container(
