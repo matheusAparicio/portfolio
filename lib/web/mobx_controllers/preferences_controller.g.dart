@@ -24,6 +24,20 @@ mixin _$PreferencesController on _PreferencesControllerBase, Store {
     });
   }
 
+  final _$_PreferencesControllerBaseActionController =
+      ActionController(name: '_PreferencesControllerBase');
+
+  @override
+  void switchDarkMode() {
+    final _$actionInfo = _$_PreferencesControllerBaseActionController
+        .startAction(name: '_PreferencesControllerBase.switchDarkMode');
+    try {
+      return super.switchDarkMode();
+    } finally {
+      _$_PreferencesControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
   @override
   String toString() {
     return '''

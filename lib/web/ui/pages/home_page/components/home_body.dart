@@ -16,7 +16,7 @@ class HomeBody extends StatefulWidget {
 }
 
 class _HomeBodyState extends State<HomeBody> {
-  double appBarHeight = 80;
+  double appBarHeight = 50;
 
   @override
   void initState() {
@@ -31,62 +31,66 @@ class _HomeBodyState extends State<HomeBody> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: PreferredSize(
-        preferredSize: Size.fromHeight(appBarHeight),
-        child: HomeAppBar(appBarHeight: appBarHeight),
-      ),
-      body: Container(
-        width: MediaQuery.of(context).size.width,
-        height: MediaQuery.of(context).size.height,
-        alignment: Alignment.center,
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-            colors: [
-              AppColors().backgroundDarkGradientBeginColor,
-              AppColors().backgroundDarkGradientEndColor,
-            ],
-          ),
+    return Container(
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+          colors: [
+            AppColors().backgroundDarkGradientBeginColor,
+            AppColors().backgroundDarkGradientEndColor,
+          ],
         ),
-        child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              SizedBox(
-                height: MediaQuery.of(context).size.height * .1,
-                child: AnimatedTextKit(
-                  animatedTexts: [
-                    FadeAnimatedText("Olá",
-                        textStyle: GoogleFonts.aubrey(
-                            color: Colors.white, fontSize: 20)),
-                    FadeAnimatedText("me chamo Matheus",
-                        textStyle: GoogleFonts.aubrey(
-                            color: Colors.white, fontSize: 20)),
-                    FadeAnimatedText("e aqui apresento um pouco de mim!",
-                        textStyle: GoogleFonts.aubrey(
-                            color: Colors.white, fontSize: 20))
-                  ],
-                  isRepeatingAnimation: false,
-                ),
-              ),
-              Observer(builder: (_) {
-                return AnimatedContainer(
-                  duration: const Duration(milliseconds: 2500),
-                  width: homeController.gifBoxWidth,
-                  height: homeController.gifBoxHeight,
-                  // color: Colors.black,
-                  alignment: Alignment.center,
-                  child: MouseRegion(
-                    cursor: SystemMouseCursors.click,
-                    child: GestureDetector(
-                      child: Lottie.asset("assets/lottie/arrow_down_red.json"),
-                    ),
+      ),
+      child: Scaffold(
+        backgroundColor: Colors.transparent,
+        appBar: PreferredSize(
+          preferredSize: Size.fromHeight(appBarHeight),
+          child: HomeAppBar(appBarHeight: appBarHeight),
+        ),
+        body: Container(
+          width: MediaQuery.of(context).size.width,
+          height: MediaQuery.of(context).size.height,
+          alignment: Alignment.center,
+          child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                SizedBox(
+                  height: MediaQuery.of(context).size.height * .1,
+                  child: AnimatedTextKit(
+                    animatedTexts: [
+                      FadeAnimatedText("Olá",
+                          textStyle: GoogleFonts.aubrey(
+                              color: Colors.white, fontSize: 20)),
+                      FadeAnimatedText("me chamo Matheus",
+                          textStyle: GoogleFonts.aubrey(
+                              color: Colors.white, fontSize: 20)),
+                      FadeAnimatedText("e aqui apresento um pouco de mim!",
+                          textStyle: GoogleFonts.aubrey(
+                              color: Colors.white, fontSize: 20))
+                    ],
+                    isRepeatingAnimation: false,
                   ),
-                );
-              })
-            ]),
+                ),
+                Observer(builder: (_) {
+                  return AnimatedContainer(
+                    duration: const Duration(milliseconds: 2500),
+                    width: homeController.gifBoxWidth,
+                    height: homeController.gifBoxHeight,
+                    // color: Colors.black,
+                    alignment: Alignment.center,
+                    child: MouseRegion(
+                      cursor: SystemMouseCursors.click,
+                      child: GestureDetector(
+                        child:
+                            Lottie.asset("assets/lottie/arrow_down_red.json"),
+                      ),
+                    ),
+                  );
+                })
+              ]),
+        ),
       ),
     );
   }
