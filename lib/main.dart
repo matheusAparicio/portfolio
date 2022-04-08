@@ -5,7 +5,8 @@ import 'package:portfolio/web/ui/pages/home_page/home_page.dart';
 void main() {
   runApp(const MyApp());
 }
-
+// TODO fazer escolher o idioma antes de começar
+// TODO já implementar o mobx
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 

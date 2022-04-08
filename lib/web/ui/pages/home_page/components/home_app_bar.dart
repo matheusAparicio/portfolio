@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
 class HomeAppBar extends StatefulWidget {
-  const HomeAppBar({ Key? key }) : super(key: key);
+  final double appBarHeight;
+  const HomeAppBar({ Key? key, required this.appBarHeight }) : super(key: key);
 
   @override
   State<HomeAppBar> createState() => _HomeAppBarState();
