@@ -24,6 +24,21 @@ mixin _$PreferencesController on _PreferencesControllerBase, Store {
     });
   }
 
+  final _$darkModeAtom = Atom(name: '_PreferencesControllerBase.darkMode');
+
+  @override
+  bool get darkMode {
+    _$darkModeAtom.reportRead();
+    return super.darkMode;
+  }
+
+  @override
+  set darkMode(bool value) {
+    _$darkModeAtom.reportWrite(value, super.darkMode, () {
+      super.darkMode = value;
+    });
+  }
+
   final _$_PreferencesControllerBaseActionController =
       ActionController(name: '_PreferencesControllerBase');
 
@@ -41,7 +56,8 @@ mixin _$PreferencesController on _PreferencesControllerBase, Store {
   @override
   String toString() {
     return '''
-language: ${language}
+language: ${language},
+darkMode: ${darkMode}
     ''';
   }
 }

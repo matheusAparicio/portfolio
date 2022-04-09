@@ -9,6 +9,8 @@ abstract class _PreferencesControllerBase with Store {
   
   @observable
   String language = "English";
+
+  @observable
   bool darkMode = true;
 
   @action

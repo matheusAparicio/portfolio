@@ -3,6 +3,7 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:lottie/lottie.dart';
 import 'package:portfolio/web/mobx_controllers/preferences_controller.dart';
 import 'package:portfolio/web/ui/custom_widgets/sequential_buttons.dart';
+import 'package:portfolio/web/ui/pages/home_page/components/toggle_mode_switch.dart';
 
 class HomeAppBar extends StatefulWidget {
   final double appBarHeight;
@@ -15,11 +16,15 @@ class HomeAppBar extends StatefulWidget {
 class _HomeAppBarState extends State<HomeAppBar> {
   double usFlagSize = 0;
   double brFlagSize = 0;
+  double flagUnselectedSize = 0;
+  double flagSelectedSize = 0;
 
   @override
   void initState() {
-    usFlagSize = widget.appBarHeight;
-    brFlagSize = widget.appBarHeight;
+    flagSelectedSize = widget.appBarHeight / 1.8;
+    flagUnselectedSize = widget.appBarHeight / 1.4;
+    usFlagSize = flagSelectedSize;
+    brFlagSize = flagUnselectedSize;
     super.initState();
   }
 
@@ -35,13 +40,7 @@ class _HomeAppBarState extends State<HomeAppBar> {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Switch(
-              value: preferencesController.darkMode,
-              onChanged: (_) {
-                setState(() {
-                  preferencesController.switchDarkMode();
-                });
-              }),
+          const ToggleModeSwitch(),
           SequencialButtons(children: [
             SizedBox(
               height: usFlagSize,
@@ -50,8 +49,8 @@ class _HomeAppBarState extends State<HomeAppBar> {
                 child: GestureDetector(
                   onTap: () {
                     setState(() {
-                      usFlagSize = widget.appBarHeight / 1.5;
-                      brFlagSize = widget.appBarHeight;
+                      usFlagSize = flagSelectedSize;
+                      brFlagSize = flagUnselectedSize;
                     });
                   },
                   child: Lottie.asset(
@@ -68,8 +67,8 @@ class _HomeAppBarState extends State<HomeAppBar> {
                 child: GestureDetector(
                   onTap: () {
                     setState(() {
-                      brFlagSize = widget.appBarHeight / 1.5;
-                      usFlagSize = widget.appBarHeight;
+                      brFlagSize = flagSelectedSize;
+                      usFlagSize = flagUnselectedSize;
                     });
                   },
                   child: Lottie.asset(
