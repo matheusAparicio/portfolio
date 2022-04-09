@@ -3,7 +3,7 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:lottie/lottie.dart';
 import 'package:portfolio/web/mobx_controllers/preferences_controller.dart';
 import 'package:portfolio/web/ui/custom_widgets/sequential_buttons.dart';
-import 'package:portfolio/web/ui/pages/home_page/components/toggle_mode_switch.dart';
+import 'package:portfolio/web/ui/custom_widgets/toggle_mode_switch.dart';
 
 class HomeAppBar extends StatefulWidget {
   final double appBarHeight;
