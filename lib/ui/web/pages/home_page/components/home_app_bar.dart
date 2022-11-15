@@ -5,6 +5,7 @@ import 'package:lottie/lottie.dart';
 import 'package:portfolio/mobx_state/preferences_state.dart';
 import 'package:portfolio/ui/web/custom_widgets/dark_mode_switch.dart';
 import 'package:portfolio/utilities/app_colors.dart';
+import 'package:portfolio/utilities/utility_functions.dart';
 
 class HomeAppBar extends StatefulWidget {
   final double appBarHeight;
@@ -29,32 +30,82 @@ class _HomeAppBarState extends State<HomeAppBar> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Row(
-                children: [
-                  const DarkModeSwitch(),
-                  Observer(builder: (_) {
-                return SizedBox(
-                  height: 50,
-                  child: MouseRegion(
-                    cursor: SystemMouseCursors.click,
-                    child: GestureDetector(
-                      onTap: () {
-                        preferencesState.switchLanguage();
-                      },
-                      child: Lottie.asset(
-                        preferencesState.language == "english" ? "assets/lottie/us_flag.json" : "assets/lottie/br_flag.json",
-                        repeat: false,
+              SizedBox(
+                width: 150,
+                child: Row(
+                  children: [
+                    const DarkModeSwitch(),
+                    Observer(builder: (_) {
+                      return SizedBox(
+                        height: 50,
+                        child: MouseRegion(
+                          cursor: SystemMouseCursors.click,
+                          child: GestureDetector(
+                            onTap: () {
+                              preferencesState.switchLanguage();
+                            },
+                            child: Lottie.asset(
+                              preferencesState.language == "english"
+                                  ? "lib/assets/lottie/us_flag.json"
+                                  : "lib/assets/lottie/br_flag.json",
+                              repeat: false,
+                            ),
+                          ),
+                        ),
+                      );
+                    }),
+                  ],
+                ),
+              ),
+              Text(
+                preferencesState.language == "english"
+                    ? "This website is in constant development."
+                    : "Este site está em constante desenvolvimento.",
+                style: GoogleFonts.aubrey(
+                    color: AppColors().softWhite, fontSize: 20),
+              ),
+              SizedBox(
+                width: 150,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    MouseRegion(
+                      cursor: SystemMouseCursors.click,
+                      child: GestureDetector(
+                        onTap: () async {
+                          await UtilityFunctions().launchURL("https://www.linkedin.com/in/matheusaps/");
+                        },
+                        child: SizedBox(
+                          height: 75,
+                          child: Lottie.asset(
+                            "lib/assets/lottie/linkedin.json",
+                            repeat: false,
+                          ),
+                        ),
                       ),
                     ),
-                  ),
-                );
-              }),
-                ],
+                    MouseRegion(
+                      cursor: SystemMouseCursors.click,
+                      child: GestureDetector(
+                        onTap: () async {
+                          await UtilityFunctions().launchURL("https://github.com/matheusAparicio");
+                        },
+                        child: Container(
+                          height: 55,
+                          decoration: BoxDecoration(
+                            color: AppColors().softWhite,
+                            borderRadius: BorderRadius.circular(15),
+                          ),
+                          child: Lottie.asset(
+                            "lib/assets/lottie/github.json",
+                            repeat: false,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
               ),
-              Text(preferencesState.language == "english" ? "This website is in constant development." : "Este site está em constante desenvolvimento.", style: GoogleFonts.aubrey(
-                                    color: AppColors().softWhite, fontSize: 20),),
-                                    Container(),
-              
             ],
           ),
         ),
@@ -63,11 +114,12 @@ class _HomeAppBarState extends State<HomeAppBar> {
           height: 15,
           decoration: BoxDecoration(
             gradient: LinearGradient(
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-            colors: [Colors.black.withOpacity(.2),
-                    Colors.transparent,]
-            ),
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+                colors: [
+                  Colors.black.withOpacity(.2),
+                  Colors.transparent,
+                ]),
           ),
         )
       ],

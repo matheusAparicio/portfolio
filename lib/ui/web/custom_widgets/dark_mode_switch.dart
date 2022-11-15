@@ -37,7 +37,7 @@ class _DarkModeSwitchState extends State<DarkModeSwitch>
               : toggleLightModeController.animateTo(0);
         },
         child: Lottie.asset(
-            "assets/lottie/toggle_light_mode.json",
+            "lib/assets/lottie/toggle_light_mode.json",
             // repeat: false,
             // animate: false,
             controller: toggleLightModeController,
