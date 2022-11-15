@@ -20,15 +20,18 @@ class HomeBody extends StatefulWidget {
 class _HomeBodyState extends State<HomeBody> {
   bool showContent = false;
   bool showScrollUp = false;
+  TextSpan TextSpanSpace = const TextSpan(text: "\n\n\n\n\n\n\n\n\n\n");
+  SizedBox ContentSpace = const SizedBox();
 
   @override
   void initState() {
-    Timer(const Duration(milliseconds: 5000), () {
+    Timer(const Duration(milliseconds: 9000), () {
       // TODO increase timer
       setState(() {
         homeState.gifBoxWidth = 200;
         homeState.gifBoxHeight = 300;
         showContent = true;
+        ContentSpace = const SizedBox(height: 1000);
       });
     });
     super.initState();
@@ -57,6 +60,7 @@ class _HomeBodyState extends State<HomeBody> {
           children: [
             NotificationListener(
               onNotification: (notification) {
+                print(notification);
                 if (homeState.scrollController.offset == 0 && showScrollUp) {
                   setState(() {
                     showScrollUp = false;
@@ -89,7 +93,7 @@ class _HomeBodyState extends State<HomeBody> {
                         height: MediaQuery.of(context).size.height * .1,
                         child: AnimatedTextKit(
                           pause: const Duration(
-                              milliseconds: 500), //TODO aumentar a duração
+                              milliseconds: 1250), //TODO aumentar a duração
                           animatedTexts: [
                             FadeAnimatedText(
                               preferencesState.language == "english"
@@ -116,7 +120,7 @@ class _HomeBodyState extends State<HomeBody> {
                       GestureDetector(
                         onTap: () {
                           homeState.scrollController.animateTo(
-                            1250,
+                            1400,
                             duration: const Duration(milliseconds: 1000),
                             curve: Curves.easeInOut,
                           );
@@ -137,9 +141,7 @@ class _HomeBodyState extends State<HomeBody> {
                       ),
 
                       // Spacing before text block
-                      showContent
-                          ? const SizedBox(height: 1000)
-                          : const SizedBox(),
+                      ContentSpace,
 
                       // First text block
                       showContent
@@ -159,7 +161,7 @@ class _HomeBodyState extends State<HomeBody> {
                                   // Beggining title
                                   TextSpan(
                                     text: preferencesState.language == "english"
-                                        ? "The beggining\n\n"
+                                        ? "The beginning\n\n"
                                         : "O início\n\n",
                                     style: AppTextStyles().genericTextStyle(
                                         fontWeight: FontWeight.w500,
@@ -169,13 +171,56 @@ class _HomeBodyState extends State<HomeBody> {
                                   // Beggining body
                                   TextSpan(
                                     text: preferencesState.language == "english"
-                                        ? "english text aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
-                                        : "Meu primeiro contato com desenvolvimento foi aos 11 anos de idade, quando fiz um curso profissionalizante de informática.\nNele, adquiri conhecimentos básicos a respeito de design e desenvolvimento web.",
+                                        ? "For as long as I can remember, I've been interested in computing. Whenever possible, I used my family's computer to access the internet and discover new things.\nMy first contact with development was at the age of 11, when I took a professional computer course, which lasted approximately 1 year.\nIn it, I acquired basic knowledge about design and web development."
+                                        : "Desde que me conheço por gente, tenho interesse por computação. Sempre que possível, usava o computador de minha família para acessar a internet e descobrir coisas novas.\nMeu primeiro contato com desenvolvimento foi aos 11 anos de idade, quando fiz um curso profissionalizante de informática, com duração aproximada de 1 ano.\nNele, adquiri conhecimentos básicos a respeito de design e desenvolvimento web.",
+                                  ),
+
+                                  // Block spacing
+                                  TextSpanSpace,
+
+                                  // First game title
+                                  TextSpan(
+                                    text: preferencesState.language == "english"
+                                        ? "When I had the definitive decision to become a developer.\n\n"
+                                        : "Quando tive a decisão definitiva de me tornar um desenvolvedor.\n\n",
+                                    style: AppTextStyles().genericTextStyle(
+                                        fontWeight: FontWeight.w500,
+                                        fontSize: 24),
+                                  ),
+
+                                  // First game body
+                                  TextSpan(
+                                    text: preferencesState.language == "english"
+                                        ? "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras commodo sapien ac nibh rhoncus, eget mattis urna volutpat.\nFusce ut tortor nibh. Nam sit amet finibus mi. Duis justo felis, scelerisque sit amet ex ut, maximus bibendum ligula. Nam ut sem pharetra, vulputate dolor id, mattis magna.\nSed eget purus dui. Curabitur imperdiet enim posuere, euismod metus ut, maximus lorem. Donec posuere sit amet tellus quis sagittis."
+                                        : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras commodo sapien ac nibh rhoncus, eget mattis urna volutpat.\nFusce ut tortor nibh. Nam sit amet finibus mi. Duis justo felis, scelerisque sit amet ex ut, maximus bibendum ligula. Nam ut sem pharetra, vulputate dolor id, mattis magna.\nSed eget purus dui. Curabitur imperdiet enim posuere, euismod metus ut, maximus lorem. Donec posuere sit amet tellus quis sagittis.",
                                   ),
                                 ],
                               ),
                               style: AppTextStyles().genericTextStyle(),
                               textAlign: TextAlign.center,
+                            )
+                          : const SizedBox(),
+                      ContentSpace,
+                      showContent
+                          ? Text(
+                              preferencesState.language == "english"
+                                  ? "Portfolio"
+                                  : "Portfólio",
+                              style: AppTextStyles().genericTextStyle(
+                                fontSize: 24,
+                                fontWeight: FontWeight.w500,
+                              ),
+                            )
+                          : const SizedBox(),
+                      showContent
+                          ? Text(
+                              preferencesState.language == "english"
+                                  ? "Website under development. For now, check my Github profile on the link at app bar."
+                                  : "Site em desenvolvimento. Por enquanto, cheque meu perfil do Github no link na app bar.",
+                              style: AppTextStyles().genericTextStyle(
+                                fontSize: 20,
+                                fontWeight: FontWeight.w500,
+                              ),
                             )
                           : const SizedBox(),
                     ],
@@ -187,9 +232,7 @@ class _HomeBodyState extends State<HomeBody> {
             Align(
               alignment: Alignment.bottomRight,
               child: AnimatedOpacity(
-                opacity: showScrollUp
-                    ? 1
-                    : 0,
+                opacity: showScrollUp ? 1 : 0,
                 duration: const Duration(milliseconds: 500),
                 child: MouseRegion(
                   cursor: SystemMouseCursors.click,

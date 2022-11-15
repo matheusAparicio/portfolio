@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
+import 'package:portfolio/mobx_state/home_state.dart';
 import 'package:portfolio/mobx_state/preferences_state.dart';
 import 'package:portfolio/ui/web/custom_widgets/app_bar_text_button.dart';
 import 'package:portfolio/ui/web/custom_widgets/dark_mode_switch.dart';
@@ -123,31 +124,54 @@ class _HomeAppBarState extends State<HomeAppBar> {
           alignment: Alignment.center,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
-            children: const [
+            children: [
               AppBarTextButton(
-                multilanguageTexts: {
-                  "english": "Placeholder",
-                  "portuguese": "Placeholder"
-                },
                 width: 150,
-              ),
-              AppBarTextButton(
-                multilanguageTexts: {
+                multilanguageTexts: const {
                   "english": "My history",
                   "portuguese": "Minha história"
                 },
-                width: 150,
+                onTap: () {
+                  homeState.scrollController.animateTo(
+                    1400,
+                    duration: const Duration(milliseconds: 1000),
+                    curve: Curves.easeInOut,
+                  );
+                },
               ),
               AppBarTextButton(
-                multilanguageTexts: {
+                width: 150,
+                multilanguageTexts: const {
+                  "english": "Home",
+                  "portuguese": "Home"
+                },
+                onTap: () {
+                  homeState.scrollController.animateTo(
+                    0,
+                    duration: const Duration(milliseconds: 1000),
+                    curve: Curves.easeInOut,
+                  );
+                },
+              ),
+              AppBarTextButton(
+                width: 150,
+                multilanguageTexts: const {
                   "english": "Portfolio",
                   "portuguese": "Portfólio"
                 },
-                width: 150,
+                onTap: () {
+                  homeState.scrollController.animateTo(
+                    2890,
+                    duration: const Duration(milliseconds: 1000),
+                    curve: Curves.easeInOut,
+                  );
+                },
               ),
             ],
           ),
         ),
+        
+        // Custom shadow
         Container(
           width: MediaQuery.of(context).size.width,
           height: shadowHeight,
@@ -160,7 +184,7 @@ class _HomeAppBarState extends State<HomeAppBar> {
                   Colors.transparent,
                 ]),
           ),
-        )
+        ),
       ],
     );
   }
