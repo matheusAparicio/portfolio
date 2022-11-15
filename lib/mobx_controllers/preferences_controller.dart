@@ -8,7 +8,7 @@ PreferencesController preferencesController = PreferencesController();
 abstract class _PreferencesControllerBase with Store {
   
   @observable
-  String language = "English";
+  String language = "english";
 
   @observable
   bool darkMode = true;
@@ -16,6 +16,15 @@ abstract class _PreferencesControllerBase with Store {
   @action
   void switchDarkMode() {
     darkMode = !darkMode;
+  }
+
+  @action
+  void switchLanguage() {
+    if (language == "english") {
+      language = "portuguese";
+    } else {
+      language = "english";
+    }
   }
 
 }

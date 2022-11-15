@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:lottie/lottie.dart';
-import 'package:portfolio/web/mobx_controllers/preferences_controller.dart';
+import 'package:portfolio/mobx_controllers/preferences_controller.dart';
 
-class ToggleModeSwitch extends StatefulWidget {
-  const ToggleModeSwitch({Key? key}) : super(key: key);
+class DarkModeSwitch extends StatefulWidget {
+  const DarkModeSwitch({Key? key}) : super(key: key);
 
   @override
-  State<ToggleModeSwitch> createState() => _ToggleModeSwitchState();
+  State<DarkModeSwitch> createState() => _DarkModeSwitchState();
 }
 
-class _ToggleModeSwitchState extends State<ToggleModeSwitch>
+class _DarkModeSwitchState extends State<DarkModeSwitch>
     with SingleTickerProviderStateMixin {
   late AnimationController toggleLightModeController;
 

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:portfolio/web/ui/pages/home_page/components/home_body.dart';
+import 'package:portfolio/ui/web/pages/home_page/components/home_body.dart';
 
 
 class HomePage extends StatefulWidget {
