@@ -8,6 +8,7 @@ import 'package:portfolio/mobx_state/home_state.dart';
 import 'package:portfolio/mobx_state/preferences_state.dart';
 import 'package:portfolio/ui/web/pages/home_page/components/home_app_bar.dart';
 import 'package:portfolio/utilities/app_colors.dart';
+import 'package:portfolio/utilities/app_text_styles.dart';
 
 class HomeBody extends StatefulWidget {
   const HomeBody({Key? key}) : super(key: key);
@@ -17,13 +18,13 @@ class HomeBody extends StatefulWidget {
 }
 
 class _HomeBodyState extends State<HomeBody> {
-  double appBarHeight = 90;
   bool showContent = false;
-  ScrollController scrollController = ScrollController();
+  bool showScrollUp = false;
 
   @override
   void initState() {
-    Timer(const Duration(milliseconds: 8000), () {
+    Timer(const Duration(milliseconds: 5000), () {
+      // TODO increase timer
       setState(() {
         homeState.gifBoxWidth = 200;
         homeState.gifBoxHeight = 300;
@@ -54,18 +55,35 @@ class _HomeBodyState extends State<HomeBody> {
         ),
         child: Stack(
           children: [
-            SingleChildScrollView(
-              controller: scrollController,
-              child: Container(
-                width: MediaQuery.of(context).size.width,
-                height: showContent ? 5000 : MediaQuery.of(context).size.height,
-                alignment: Alignment.center,
-                child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
+            NotificationListener(
+              onNotification: (notification) {
+                if (homeState.scrollController.offset == 0 && showScrollUp) {
+                  setState(() {
+                    showScrollUp = false;
+                  });
+                } else if (homeState.scrollController.offset > 0 &&
+                    !showScrollUp) {
+                  setState(() {
+                    showScrollUp = true;
+                  });
+                }
+                return true;
+              },
+              child: SingleChildScrollView(
+                controller: homeState.scrollController,
+                child: Container(
+                  width: MediaQuery.of(context).size.width,
+                  height:
+                      showContent ? 5000 : MediaQuery.of(context).size.height,
+                  alignment: Alignment.center,
+                  child: Column(
+                    mainAxisAlignment: showContent
+                        ? MainAxisAlignment.start
+                        : MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      const SizedBox(
-                        height: 200,
+                      SizedBox(
+                        height: showContent ? 250 : 0,
                       ),
                       SizedBox(
                         height: MediaQuery.of(context).size.height * .1,
@@ -77,22 +95,19 @@ class _HomeBodyState extends State<HomeBody> {
                               preferencesState.language == "english"
                                   ? "Greetings"
                                   : "Olá",
-                              textStyle: GoogleFonts.aubrey(
-                                  color: AppColors().softWhite, fontSize: 20),
+                              textStyle: AppTextStyles().genericTextStyle(),
                             ),
                             FadeAnimatedText(
                               preferencesState.language == "english"
                                   ? "my name is Matheus"
                                   : "me chamo Matheus",
-                              textStyle: GoogleFonts.aubrey(
-                                  color: AppColors().softWhite, fontSize: 20),
+                              textStyle: AppTextStyles().genericTextStyle(),
                             ),
                             FadeAnimatedText(
                               preferencesState.language == "english"
                                   ? "and here I present some of myself!"
                                   : "e aqui apresento um pouco de mim!",
-                              textStyle: GoogleFonts.aubrey(
-                                  color: AppColors().softWhite, fontSize: 20),
+                              textStyle: AppTextStyles().genericTextStyle(),
                             ),
                           ],
                           isRepeatingAnimation: false,
@@ -100,9 +115,11 @@ class _HomeBodyState extends State<HomeBody> {
                       ),
                       GestureDetector(
                         onTap: () {
-                          scrollController.animateTo(1000,
-                              duration: const Duration(milliseconds: 1000),
-                              curve: Curves.easeIn);
+                          homeState.scrollController.animateTo(
+                            1250,
+                            duration: const Duration(milliseconds: 1000),
+                            curve: Curves.easeInOut,
+                          );
                         },
                         child: AnimatedContainer(
                           duration: const Duration(milliseconds: 2500),
@@ -118,10 +135,87 @@ class _HomeBodyState extends State<HomeBody> {
                           ),
                         ),
                       ),
-                    ]),
+
+                      // Spacing before text block
+                      showContent
+                          ? const SizedBox(height: 1000)
+                          : const SizedBox(),
+
+                      // First text block
+                      showContent
+                          ? Text.rich(
+                              TextSpan(
+                                children: <TextSpan>[
+                                  // Main title
+                                  TextSpan(
+                                    text: preferencesState.language == "english"
+                                        ? "A brief summary of my history in computing:\n\n\n\n\n\n\n"
+                                        : "Um breve resumo de minha história na computação:\n\n\n\n\n\n\n",
+                                    style: AppTextStyles().genericTextStyle(
+                                        fontWeight: FontWeight.w500,
+                                        fontSize: 24),
+                                  ),
+
+                                  // Beggining title
+                                  TextSpan(
+                                    text: preferencesState.language == "english"
+                                        ? "The beggining\n\n"
+                                        : "O início\n\n",
+                                    style: AppTextStyles().genericTextStyle(
+                                        fontWeight: FontWeight.w500,
+                                        fontSize: 24),
+                                  ),
+
+                                  // Beggining body
+                                  TextSpan(
+                                    text: preferencesState.language == "english"
+                                        ? "english text aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+                                        : "Meu primeiro contato com desenvolvimento foi aos 11 anos de idade, quando fiz um curso profissionalizante de informática.\nNele, adquiri conhecimentos básicos a respeito de design e desenvolvimento web.",
+                                  ),
+                                ],
+                              ),
+                              style: AppTextStyles().genericTextStyle(),
+                              textAlign: TextAlign.center,
+                            )
+                          : const SizedBox(),
+                    ],
+                  ),
+                ),
               ),
             ),
-            HomeAppBar(appBarHeight: appBarHeight),
+            const HomeAppBar(),
+            Align(
+              alignment: Alignment.bottomRight,
+              child: AnimatedOpacity(
+                opacity: showScrollUp
+                    ? 1
+                    : 0,
+                duration: const Duration(milliseconds: 500),
+                child: MouseRegion(
+                  cursor: SystemMouseCursors.click,
+                  child: GestureDetector(
+                    onTap: () {
+                      homeState.scrollController.animateTo(
+                        0,
+                        duration: const Duration(milliseconds: 1000),
+                        curve: Curves.easeInOut,
+                      );
+                    },
+                    child: Container(
+                      margin: const EdgeInsets.only(
+                        right: 15,
+                        bottom: 15,
+                      ),
+                      child: Icon(
+                        Icons.keyboard_arrow_up,
+                        size: 60,
+                        color: AppColors().softWhite,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            )
           ],
         ),
       );
