@@ -6,4 +6,6 @@ class AppColors {
 
   Color backgroundLightGradientBeginColor = const Color.fromARGB(255, 42, 79, 158);
   Color backgroundLightGradientEndColor = const Color.fromARGB(255, 39, 69, 133);
+
+  Color softWhite = const Color.fromARGB(255, 246, 246, 246);
 }

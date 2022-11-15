@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'preferences_controller.dart';
+part of 'preferences_state.dart';
 
 // **************************************************************************
 // StoreGenerator
@@ -8,8 +8,8 @@ part of 'preferences_controller.dart';
 
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
-mixin _$PreferencesController on _PreferencesControllerBase, Store {
-  final _$languageAtom = Atom(name: '_PreferencesControllerBase.language');
+mixin _$PreferencesState on _PreferencesStateBase, Store {
+  final _$languageAtom = Atom(name: '_PreferencesStateBase.language');
 
   @override
   String get language {
@@ -24,7 +24,7 @@ mixin _$PreferencesController on _PreferencesControllerBase, Store {
     });
   }
 
-  final _$darkModeAtom = Atom(name: '_PreferencesControllerBase.darkMode');
+  final _$darkModeAtom = Atom(name: '_PreferencesStateBase.darkMode');
 
   @override
   bool get darkMode {
@@ -39,17 +39,28 @@ mixin _$PreferencesController on _PreferencesControllerBase, Store {
     });
   }
 
-  final _$_PreferencesControllerBaseActionController =
-      ActionController(name: '_PreferencesControllerBase');
+  final _$_PreferencesStateBaseActionController =
+      ActionController(name: '_PreferencesStateBase');
 
   @override
   void switchDarkMode() {
-    final _$actionInfo = _$_PreferencesControllerBaseActionController
-        .startAction(name: '_PreferencesControllerBase.switchDarkMode');
+    final _$actionInfo = _$_PreferencesStateBaseActionController.startAction(
+        name: '_PreferencesStateBase.switchDarkMode');
     try {
       return super.switchDarkMode();
     } finally {
-      _$_PreferencesControllerBaseActionController.endAction(_$actionInfo);
+      _$_PreferencesStateBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void switchLanguage() {
+    final _$actionInfo = _$_PreferencesStateBaseActionController.startAction(
+        name: '_PreferencesStateBase.switchLanguage');
+    try {
+      return super.switchLanguage();
+    } finally {
+      _$_PreferencesStateBaseActionController.endAction(_$actionInfo);
     }
   }
 

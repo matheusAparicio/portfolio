@@ -1,11 +1,11 @@
 import 'package:mobx/mobx.dart';
-part 'preferences_controller.g.dart';
+part 'preferences_state.g.dart';
 
-class PreferencesController = _PreferencesControllerBase with _$PreferencesController;
+class PreferencesState = _PreferencesStateBase with _$PreferencesState;
 
-PreferencesController preferencesController = PreferencesController();
+PreferencesState preferencesState = PreferencesState();
 
-abstract class _PreferencesControllerBase with Store {
+abstract class _PreferencesStateBase with Store {
   
   @observable
   String language = "english";
