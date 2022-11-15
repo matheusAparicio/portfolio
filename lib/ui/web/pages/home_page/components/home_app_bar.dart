@@ -59,8 +59,8 @@ class _HomeAppBarState extends State<HomeAppBar> {
               ),
               Text(
                 preferencesState.language == "english"
-                    ? "This website is in constant development."
-                    : "Este site está em constante desenvolvimento.",
+                    ? "This website is in early development stage."
+                    : "Este site está em estado inicial de desenvolvimento.",
                 style: GoogleFonts.aubrey(
                     color: AppColors().softWhite, fontSize: 20),
               ),
@@ -76,7 +76,7 @@ class _HomeAppBarState extends State<HomeAppBar> {
                           await UtilityFunctions().launchURL("https://www.linkedin.com/in/matheusaps/");
                         },
                         child: SizedBox(
-                          height: 75,
+                          height: 50,
                           child: Lottie.asset(
                             "lib/assets/lottie/linkedin.json",
                             repeat: false,
@@ -91,7 +91,7 @@ class _HomeAppBarState extends State<HomeAppBar> {
                           await UtilityFunctions().launchURL("https://github.com/matheusAparicio");
                         },
                         child: Container(
-                          height: 55,
+                          height: 40,
                           decoration: BoxDecoration(
                             color: AppColors().softWhite,
                             borderRadius: BorderRadius.circular(15),
