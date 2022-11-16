@@ -99,19 +99,19 @@ class _HomeBodyState extends State<HomeBody> {
                               preferencesState.language == "english"
                                   ? "Greetings"
                                   : "Olá",
-                              textStyle: AppTextStyles().genericTextStyle(),
+                              textStyle: AppTextStyles().genericTextStyle(fontSize: 32),
                             ),
                             FadeAnimatedText(
                               preferencesState.language == "english"
                                   ? "my name is Matheus"
                                   : "me chamo Matheus",
-                              textStyle: AppTextStyles().genericTextStyle(),
+                              textStyle: AppTextStyles().genericTextStyle(fontSize: 32),
                             ),
                             FadeAnimatedText(
                               preferencesState.language == "english"
                                   ? "and here I present some of myself!"
                                   : "e aqui apresento um pouco de mim!",
-                              textStyle: AppTextStyles().genericTextStyle(),
+                              textStyle: AppTextStyles().genericTextStyle(fontSize: 32),
                             ),
                           ],
                           isRepeatingAnimation: false,
@@ -155,7 +155,7 @@ class _HomeBodyState extends State<HomeBody> {
                                         : "Um breve resumo de minha história na computação:\n\n\n\n\n\n\n",
                                     style: AppTextStyles().genericTextStyle(
                                         fontWeight: FontWeight.w500,
-                                        fontSize: 24),
+                                        fontSize: 32),
                                   ),
 
                                   // Beggining title
@@ -165,13 +165,13 @@ class _HomeBodyState extends State<HomeBody> {
                                         : "O início\n\n",
                                     style: AppTextStyles().genericTextStyle(
                                         fontWeight: FontWeight.w500,
-                                        fontSize: 24),
+                                        fontSize: 28),
                                   ),
 
                                   // Beggining body
                                   TextSpan(
                                     text: preferencesState.language == "english"
-                                        ? "For as long as I can remember, I've been interested in computing. Whenever possible, I used my family's computer to access the internet and discover new things.\nMy first contact with development was at the age of 11, when I took a professional computer course, which lasted approximately 1 year.\nIn it, I acquired basic knowledge about design and web development."
+                                        ? "For as long as I can remember, I've been interested in computing. Whenever possible, I used my family's computer to access the internet and discover a new world.\nMy first contact with development was at the age of 11, when I took a vocational computer course, which lasted approximately 1 year.\nIn it, I acquired basic knowledge about design and web development."
                                         : "Desde que me conheço por gente, tenho interesse por computação. Sempre que possível, usava o computador de minha família para acessar a internet e descobrir coisas novas.\nMeu primeiro contato com desenvolvimento foi aos 11 anos de idade, quando fiz um curso profissionalizante de informática, com duração aproximada de 1 ano.\nNele, adquiri conhecimentos básicos a respeito de design e desenvolvimento web.",
                                   ),
 
@@ -185,7 +185,7 @@ class _HomeBodyState extends State<HomeBody> {
                                         : "Quando tive a decisão definitiva de me tornar um desenvolvedor.\n\n",
                                     style: AppTextStyles().genericTextStyle(
                                         fontWeight: FontWeight.w500,
-                                        fontSize: 24),
+                                        fontSize: 28),
                                   ),
 
                                   // First game body
@@ -207,7 +207,7 @@ class _HomeBodyState extends State<HomeBody> {
                                   ? "Portfolio"
                                   : "Portfólio",
                               style: AppTextStyles().genericTextStyle(
-                                fontSize: 24,
+                                fontSize: 28,
                                 fontWeight: FontWeight.w500,
                               ),
                             )
