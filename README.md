@@ -1,6 +1,6 @@
 # Portfolio Website
 
-This is my presentation website sourcecode, done with Flutter.
+This is my presentation website source code, done with Flutter.
 
 You can check it results here: https://matheusaparicio.github.io
 
