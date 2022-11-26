@@ -8,6 +8,7 @@ import 'package:portfolio/ui/web/custom_widgets/app_bar_text_button.dart';
 import 'package:portfolio/ui/web/custom_widgets/dark_mode_switch.dart';
 import 'package:portfolio/utilities/app_colors.dart';
 import 'package:portfolio/utilities/app_text_styles.dart';
+import 'package:portfolio/utilities/constants.dart' as constants;
 import 'package:portfolio/utilities/utility_functions.dart';
 
 class HomeAppBar extends StatefulWidget {
@@ -133,7 +134,7 @@ class _HomeAppBarState extends State<HomeAppBar> {
                 },
                 onTap: () {
                   homeState.scrollController.animateTo(
-                    1400,
+                    constants.MY_HISTORY_OFFSET,
                     duration: const Duration(milliseconds: 1000),
                     curve: Curves.easeInOut,
                   );
@@ -147,7 +148,7 @@ class _HomeAppBarState extends State<HomeAppBar> {
                 },
                 onTap: () {
                   homeState.scrollController.animateTo(
-                    0,
+                    constants.HOME_OFFSET,
                     duration: const Duration(milliseconds: 1000),
                     curve: Curves.easeInOut,
                   );
@@ -161,7 +162,7 @@ class _HomeAppBarState extends State<HomeAppBar> {
                 },
                 onTap: () {
                   homeState.scrollController.animateTo(
-                    2890,
+                    constants.PORTFOLIO_OFFSET,
                     duration: const Duration(milliseconds: 1000),
                     curve: Curves.easeInOut,
                   );

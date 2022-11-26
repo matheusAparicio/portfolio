@@ -9,6 +9,7 @@ import 'package:portfolio/mobx_state/preferences_state.dart';
 import 'package:portfolio/ui/web/pages/home_page/components/home_app_bar.dart';
 import 'package:portfolio/utilities/app_colors.dart';
 import 'package:portfolio/utilities/app_text_styles.dart';
+import 'package:portfolio/utilities/constants.dart' as constants;
 
 class HomeBody extends StatefulWidget {
   const HomeBody({Key? key}) : super(key: key);
@@ -120,7 +121,7 @@ class _HomeBodyState extends State<HomeBody> {
                       GestureDetector(
                         onTap: () {
                           homeState.scrollController.animateTo(
-                            1400,
+                            constants.MY_HISTORY_OFFSET,
                             duration: const Duration(milliseconds: 1000),
                             curve: Curves.easeInOut,
                           );
@@ -192,7 +193,7 @@ class _HomeBodyState extends State<HomeBody> {
                                   TextSpan(
                                     text: preferencesState.language == "english"
                                         ? "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras commodo sapien ac nibh rhoncus, eget mattis urna volutpat.\nFusce ut tortor nibh. Nam sit amet finibus mi. Duis justo felis, scelerisque sit amet ex ut, maximus bibendum ligula. Nam ut sem pharetra, vulputate dolor id, mattis magna.\nSed eget purus dui. Curabitur imperdiet enim posuere, euismod metus ut, maximus lorem. Donec posuere sit amet tellus quis sagittis."
-                                        : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras commodo sapien ac nibh rhoncus, eget mattis urna volutpat.\nFusce ut tortor nibh. Nam sit amet finibus mi. Duis justo felis, scelerisque sit amet ex ut, maximus bibendum ligula. Nam ut sem pharetra, vulputate dolor id, mattis magna.\nSed eget purus dui. Curabitur imperdiet enim posuere, euismod metus ut, maximus lorem. Donec posuere sit amet tellus quis sagittis.",
+                                        : "Aos 14 anos de idade, incentivado pelo crescente mercado de jogos independentes, comecei a estudar programação em casa por conta própria.\nA primeira linguagem que aprendi foi a GML, linguagem usada pelo software GameMaker. De lá, até meus 16 anos, passei desenvolvendo projetos e melhorando minhas habilidades.\nFoi nessa época ",
                                   ),
                                 ],
                               ),
@@ -239,7 +240,7 @@ class _HomeBodyState extends State<HomeBody> {
                   child: GestureDetector(
                     onTap: () {
                       homeState.scrollController.animateTo(
-                        0,
+                        constants.HOME_OFFSET,
                         duration: const Duration(milliseconds: 1000),
                         curve: Curves.easeInOut,
                       );
