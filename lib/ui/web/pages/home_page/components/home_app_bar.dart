@@ -38,30 +38,45 @@ class _HomeAppBarState extends State<HomeAppBar> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               SizedBox(
-                width: 150,
+                width: 200,
                 child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const DarkModeSwitch(),
-                    Observer(builder: (_) {
-                      return SizedBox(
-                        height: 50,
-                        child: MouseRegion(
-                          cursor: SystemMouseCursors.click,
-                          child: GestureDetector(
-                            onTap: () {
-                              preferencesState.switchLanguage();
-                            },
-                            child: Lottie.asset(
-                              preferencesState.language == "english"
-                                  ? "lib/assets/lottie/us_flag.json"
-                                  : "lib/assets/lottie/br_flag.json",
-                              repeat: false,
-                            ),
-                          ),
+                    Container(
+                      width: 130,
+                      height: 40,
+                      decoration: BoxDecoration(
+                        border: Border.all(
+                          color: AppColors().softWhite,
                         ),
-                      );
-                    }),
+                      ),
+                      child: Observer(builder: (_) {
+                        return DropdownButtonHideUnderline(
+                          child: DropdownButton(
+                            value: preferencesState.language,
+                            items: const [
+                              DropdownMenuItem(
+                                value: "portuguese",
+                                child: Text("Português (BR)"),
+                              ),
+                              DropdownMenuItem(
+                                value: "english",
+                                child: Text("English (US)"),
+                              ),
+                            ],
+                            onChanged: (String? value) {
+                              preferencesState.language = value ?? "english";
+                            },
+                            style:
+                                AppTextStyles().genericTextStyle(fontSize: 18),
+                            dropdownColor:
+                                AppColors().backgroundDarkGradientBeginColor,
+                            iconEnabledColor: AppColors().softWhite,
+                          ),
+                        );
+                      }),
+                    ),
+                    const DarkModeSwitch(),
                   ],
                 ),
               ),
@@ -171,7 +186,7 @@ class _HomeAppBarState extends State<HomeAppBar> {
             ],
           ),
         ),
-        
+
         // Custom shadow
         Container(
           width: MediaQuery.of(context).size.width,
