@@ -37,100 +37,115 @@ class _HomeAppBarState extends State<HomeAppBar> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              SizedBox(
-                width: 200,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Container(
-                      width: 130,
-                      height: 40,
-                      decoration: BoxDecoration(
-                        border: Border.all(
-                          color: AppColors().softWhite,
+              MouseRegion(
+                onExit: (event) {
+                  preferencesState.showContacts = false;
+                },
+                child: SizedBox(
+                  width: MediaQuery.of(context).size.width * .15,
+                  height: MediaQuery.of(context).size.height,
+                  child: Observer(builder: (_) {
+                    return Row(
+                      children: [
+                        MouseRegion(
+                          cursor: SystemMouseCursors.click,
+                          onEnter: (event) {
+                            preferencesState.showContacts = true;
+                          },
+                          child: AnimatedContainer(
+                            duration: const Duration(milliseconds: 500), // TODO arrumar a hitbox do botão de contato
+                            width: preferencesState.showContacts
+                                ? MediaQuery.of(context).size.width * .05
+                                : MediaQuery.of(context).size.width * .15,
+                            child: Row(
+                              children: [
+                                Text(
+                                  "Contato",
+                                  style: AppTextStyles().genericTextStyle(
+                                    fontSize: 24,
+                                  ),
+                                ),
+                                Icon(
+                                  preferencesState.showContacts
+                                      ? Icons.keyboard_arrow_left
+                                      : Icons.keyboard_arrow_right,
+                                  color: AppColors().softWhite,
+                                ),
+                              ],
+                            ),
+                          ),
                         ),
-                      ),
-                      child: Observer(builder: (_) {
-                        return DropdownButtonHideUnderline(
-                          child: DropdownButton(
-                            value: preferencesState.language,
-                            items: const [
-                              DropdownMenuItem(
-                                value: "portuguese",
-                                child: Text("Português (BR)"),
+                        AnimatedContainer(
+                          width: preferencesState.showContacts
+                              ? MediaQuery.of(context).size.width * .1
+                              : 0,
+                          duration: const Duration(milliseconds: 500),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              MouseRegion(
+                                cursor: SystemMouseCursors.click,
+                                child: GestureDetector(
+                                  onTap: () async {
+                                    await UtilityFunctions().launchURL(
+                                        "https://www.linkedin.com/in/matheusaps/");
+                                  },
+                                  child: SizedBox(
+                                    height: 50,
+                                    child: Lottie.asset(
+                                      "lib/assets/lottie/linkedin.json",
+                                      repeat: false,
+                                    ),
+                                  ),
+                                ),
                               ),
-                              DropdownMenuItem(
-                                value: "english",
-                                child: Text("English (US)"),
+                              MouseRegion(
+                                cursor: SystemMouseCursors.click,
+                                child: GestureDetector(
+                                  onTap: () async {
+                                    await UtilityFunctions().launchURL(
+                                        "https://github.com/matheusAparicio");
+                                  },
+                                  child: Container(
+                                    height: 40,
+                                    decoration: BoxDecoration(
+                                      color: AppColors().softWhite,
+                                      borderRadius: BorderRadius.circular(10),
+                                    ),
+                                    child: Lottie.asset(
+                                      "lib/assets/lottie/github.json",
+                                      repeat: false,
+                                    ),
+                                  ),
+                                ),
                               ),
                             ],
-                            onChanged: (String? value) {
-                              preferencesState.language = value ?? "english";
-                            },
-                            style:
-                                AppTextStyles().genericTextStyle(fontSize: 18),
-                            dropdownColor:
-                                AppColors().backgroundDarkGradientBeginColor,
-                            iconEnabledColor: AppColors().softWhite,
                           ),
-                        );
-                      }),
-                    ),
-                    const DarkModeSwitch(),
-                  ],
+                        ),
+                      ],
+                    );
+                  }),
                 ),
               ),
-              Observer(builder: (_) {
-                return Text(
-                  preferencesState.language == "english"
-                      ? "This website is in early development stage."
-                      : "Este site está em estado inicial de desenvolvimento.",
-                  style: AppTextStyles().genericTextStyle(),
-                );
-              }),
+              Column(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Text(
+                    "Matheus",
+                    style: AppTextStyles().genericTextStyle(fontSize: 28),
+                  ),
+                  Observer(builder: (_) {
+                    return Text(
+                      preferencesState.language == "english"
+                          ? "This website is in early development stage."
+                          : "Este site está em estado inicial de desenvolvimento.",
+                      style: AppTextStyles().genericTextStyle(),
+                    );
+                  }),
+                ],
+              ),
               SizedBox(
-                width: 150,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    MouseRegion(
-                      cursor: SystemMouseCursors.click,
-                      child: GestureDetector(
-                        onTap: () async {
-                          await UtilityFunctions().launchURL(
-                              "https://www.linkedin.com/in/matheusaps/");
-                        },
-                        child: SizedBox(
-                          height: 50,
-                          child: Lottie.asset(
-                            "lib/assets/lottie/linkedin.json",
-                            repeat: false,
-                          ),
-                        ),
-                      ),
-                    ),
-                    MouseRegion(
-                      cursor: SystemMouseCursors.click,
-                      child: GestureDetector(
-                        onTap: () async {
-                          await UtilityFunctions()
-                              .launchURL("https://github.com/matheusAparicio");
-                        },
-                        child: Container(
-                          height: 40,
-                          decoration: BoxDecoration(
-                            color: AppColors().softWhite,
-                            borderRadius: BorderRadius.circular(15),
-                          ),
-                          child: Lottie.asset(
-                            "lib/assets/lottie/github.json",
-                            repeat: false,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
+                width: MediaQuery.of(context).size.width * .15,
               ),
             ],
           ),

@@ -13,6 +13,9 @@ abstract class _PreferencesStateBase with Store {
   @observable
   bool darkMode = true;
 
+  @observable
+  bool showContacts = false;
+
   @action
   void switchDarkMode() {
     darkMode = !darkMode;

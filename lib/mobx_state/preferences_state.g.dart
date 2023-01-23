@@ -39,6 +39,21 @@ mixin _$PreferencesState on _PreferencesStateBase, Store {
     });
   }
 
+  final _$showContactsAtom = Atom(name: '_PreferencesStateBase.showContacts');
+
+  @override
+  bool get showContacts {
+    _$showContactsAtom.reportRead();
+    return super.showContacts;
+  }
+
+  @override
+  set showContacts(bool value) {
+    _$showContactsAtom.reportWrite(value, super.showContacts, () {
+      super.showContacts = value;
+    });
+  }
+
   final _$_PreferencesStateBaseActionController =
       ActionController(name: '_PreferencesStateBase');
 
@@ -68,7 +83,8 @@ mixin _$PreferencesState on _PreferencesStateBase, Store {
   String toString() {
     return '''
 language: ${language},
-darkMode: ${darkMode}
+darkMode: ${darkMode},
+showContacts: ${showContacts}
     ''';
   }
 }
