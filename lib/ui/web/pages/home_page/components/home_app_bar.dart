@@ -23,6 +23,9 @@ class _HomeAppBarState extends State<HomeAppBar> {
   double shadowHeight = 15;
   double secondaryAppBarHeight = 35;
 
+  bool hoveringPortfolio = false;
+  bool hoveringContacts = false;
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -53,14 +56,18 @@ class _HomeAppBarState extends State<HomeAppBar> {
                             preferencesState.showContacts = true;
                           },
                           child: AnimatedContainer(
-                            duration: const Duration(milliseconds: 500), // TODO arrumar a hitbox do botão de contato
+                            duration: const Duration(
+                                milliseconds:
+                                    500), // TODO arrumar a hitbox do botão de contato
                             width: preferencesState.showContacts
-                                ? MediaQuery.of(context).size.width * .05
+                                ? MediaQuery.of(context).size.width * .07
                                 : MediaQuery.of(context).size.width * .15,
                             child: Row(
                               children: [
                                 Text(
-                                  "Contato",
+                                  preferencesState.language == "portuguese"
+                                      ? "Linguagens"
+                                      : "Languages",
                                   style: AppTextStyles().genericTextStyle(
                                     fontSize: 24,
                                   ),
@@ -77,7 +84,7 @@ class _HomeAppBarState extends State<HomeAppBar> {
                         ),
                         AnimatedContainer(
                           width: preferencesState.showContacts
-                              ? MediaQuery.of(context).size.width * .1
+                              ? MediaQuery.of(context).size.width * .08
                               : 0,
                           duration: const Duration(milliseconds: 500),
                           child: Row(
@@ -86,39 +93,63 @@ class _HomeAppBarState extends State<HomeAppBar> {
                               MouseRegion(
                                 cursor: SystemMouseCursors.click,
                                 child: GestureDetector(
-                                  onTap: () async {
-                                    await UtilityFunctions().launchURL(
-                                        "https://www.linkedin.com/in/matheusaps/");
+                                  onTap: () {
+                                    preferencesState.language = "portuguese";
                                   },
-                                  child: SizedBox(
-                                    height: 50,
-                                    child: Lottie.asset(
-                                      "lib/assets/lottie/linkedin.json",
-                                      repeat: false,
-                                    ),
+                                  child: Text(
+                                    "PT-BR",
+                                    style: AppTextStyles().genericTextStyle(),
                                   ),
                                 ),
                               ),
                               MouseRegion(
                                 cursor: SystemMouseCursors.click,
                                 child: GestureDetector(
-                                  onTap: () async {
-                                    await UtilityFunctions().launchURL(
-                                        "https://github.com/matheusAparicio");
+                                  onTap: () {
+                                    preferencesState.language = "english";
                                   },
-                                  child: Container(
-                                    height: 40,
-                                    decoration: BoxDecoration(
-                                      color: AppColors().softWhite,
-                                      borderRadius: BorderRadius.circular(10),
-                                    ),
-                                    child: Lottie.asset(
-                                      "lib/assets/lottie/github.json",
-                                      repeat: false,
-                                    ),
+                                  child: Text(
+                                    "EN-US",
+                                    style: AppTextStyles().genericTextStyle(),
                                   ),
                                 ),
                               ),
+                              // MouseRegion(
+                              //   cursor: SystemMouseCursors.click,
+                              //   child: GestureDetector(
+                              //     onTap: () async {
+                              //       await UtilityFunctions().launchURL(
+                              //           "https://www.linkedin.com/in/matheusaps/");
+                              //     },
+                              //     child: SizedBox(
+                              //       height: 50,
+                              //       child: Lottie.asset(
+                              //         "lib/assets/lottie/linkedin.json",
+                              //         repeat: false,
+                              //       ),
+                              //     ),
+                              //   ),
+                              // ),
+                              // MouseRegion(
+                              //   cursor: SystemMouseCursors.click,
+                              //   child: GestureDetector(
+                              //     onTap: () async {
+                              //       await UtilityFunctions().launchURL(
+                              //           "https://github.com/matheusAparicio");
+                              //     },
+                              //     child: Container(
+                              //       height: 40,
+                              //       decoration: BoxDecoration(
+                              //         color: AppColors().softWhite,
+                              //         borderRadius: BorderRadius.circular(10),
+                              //       ),
+                              //       child: Lottie.asset(
+                              //         "lib/assets/lottie/github.json",
+                              //         repeat: false,
+                              //       ),
+                              //     ),
+                              //   ),
+                              // ),
                             ],
                           ),
                         ),
@@ -144,8 +175,81 @@ class _HomeAppBarState extends State<HomeAppBar> {
                   }),
                 ],
               ),
-              SizedBox(
+              Container(
                 width: MediaQuery.of(context).size.width * .15,
+                // color: AppColors().backgroundLightGradientEndColor,
+                child: Row(
+                  children: [
+                    MouseRegion(
+                      cursor: SystemMouseCursors.click,
+                      onEnter: (event) {
+                        setState(() {
+                          hoveringPortfolio = true;
+                        });
+                      },
+                      onExit: (event) {
+                        setState(() {
+                          hoveringPortfolio = false;
+                        });
+                      },
+                      child: Container(
+                        width: MediaQuery.of(context).size.width * .075,
+                        height: MediaQuery.of(context).size.height,
+                        alignment: Alignment.center,
+                        decoration: BoxDecoration(
+                          // color: Colors.amberAccent,
+                          border: hoveringPortfolio
+                              ? Border(
+                                  bottom: BorderSide(
+                                    color: AppColors().softWhite,
+                                  ),
+                                )
+                              : null,
+                        ),
+                        child: Text(
+                          "Portfólio",
+                          style: AppTextStyles().genericTextStyle(
+                            fontSize: 22,
+                          ),
+                        ),
+                      ),
+                    ),
+                    MouseRegion(
+                      onEnter: (event) {
+                        setState(() {
+                          hoveringContacts = true;
+                        });
+                      },
+                      onExit: (event) {
+                        setState(() {
+                          hoveringContacts = false;
+                        });
+                      },
+                      cursor: SystemMouseCursors.click,
+                      child: Container(
+                        width: MediaQuery.of(context).size.width * .075,
+                        height: MediaQuery.of(context).size.height,
+                        alignment: Alignment.center,
+                        decoration: BoxDecoration(
+                          // color: Colors.blueAccent,
+                          border: hoveringContacts
+                              ? Border(
+                                  bottom: BorderSide(
+                                    color: AppColors().softWhite,
+                                  ),
+                                )
+                              : null,
+                        ),
+                        child: Text(
+                          "Contato",
+                          style: AppTextStyles().genericTextStyle(
+                            fontSize: 22,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ],
           ),
@@ -173,8 +277,8 @@ class _HomeAppBarState extends State<HomeAppBar> {
               AppBarTextButton(
                 width: 150,
                 multilanguageTexts: const {
-                  "english": "Home",
-                  "portuguese": "Home"
+                  "english": "Part II",
+                  "portuguese": "Parte II"
                 },
                 onTap: () {
                   homeState.scrollController.animateTo(
@@ -187,8 +291,8 @@ class _HomeAppBarState extends State<HomeAppBar> {
               AppBarTextButton(
                 width: 150,
                 multilanguageTexts: const {
-                  "english": "Portfolio",
-                  "portuguese": "Portfólio"
+                  "english": "Part III",
+                  "portuguese": "Parte III"
                 },
                 onTap: () {
                   homeState.scrollController.animateTo(
